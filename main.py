@@ -8,7 +8,7 @@ logging.basicConfig(filename="task.log", format='%(asctime)s : %(message)s', fil
 logger = logging.getLogger()
 
 
-class Task28July:
+class Task24July:
 
     def __init__(self, user, pwd):
         """Class constructor"""
@@ -35,9 +35,9 @@ class Task28July:
 
     def create_sql_tables(self,cursor):
         """Answer 1: method to create database and tables in mysql"""
-        cursor.execute("create database if not exists task28july")
+        cursor.execute("create database if not exists task24july")
         logging.info("Database created successfully")
-        cursor.execute("use task28july")
+        cursor.execute("use task24july")
         attribute_table_structure ="Dress_ID int,Style varchar(20),Price varchar(10),Rating FLOAT(2),Size varchar(10),Season varchar(20),NeckLine varchar(20),SleeveLength varchar(20),waiseline varchar(20),Material varchar(20),FabricType varchar(10),Decoration varchar(10),`Pattern Type` varchar(10),Recommendation int"
         cursor.execute("create table if not exists attribute("+attribute_table_structure+")")
         logging.info("Table Attribute created successfully")
@@ -65,9 +65,9 @@ class Task28July:
 
     def read_data_pandas(self,conn):
         """Answer 3:method to read data from mysql using pandas"""
-        df_attribute = pd.read_sql("select * from task28july.attribute",conn)
+        df_attribute = pd.read_sql("select * from task24july.attribute",conn)
         print(df_attribute)
-        df_sales = pd.read_sql("select * from task28july.sales",conn)
+        df_sales = pd.read_sql("select * from task24july.sales",conn)
         print(df_sales)
         logging.info("Data fetched successfully")
 
@@ -79,7 +79,7 @@ class Task28July:
         logging.info("Data converted in to json")
         data = json.loads(data)
         print(data)
-        client_db = client["task28july"]
+        client_db = client["task24july"]
         client_collection = client_db["attribute"]
         try:
             client_collection.insert_many(data)
@@ -105,7 +105,7 @@ class Task28July:
         """Answer 8:method to search dress with zero recommendation"""
         cursor.execute("select count(dress_id) from attribute where recommendation =0")
         logging.info("No of dress having recommendation 0 detail fetched")
-        print(cursor.fetchone()[0])
+        print("No of dress having recommendation 0:",cursor.fetchone()[0])
 
     def total_sales(self,cursor):
         """Answer 9:method to fetch total sales of individual dresses"""
@@ -127,22 +127,22 @@ class Task28July:
 
 
 if __name__=="__main__":
-    obj = Task28July("root","root")
+    obj = Task24July("root","root")
     conn = obj.connect_mysql()
     if conn is not None:
         cursor = conn.cursor()
-        cursor.execute("use task28july")
-        # obj.create_sql_tables(cursor)
-        # obj.load_data(cursor)
-        # conn.commit()
-        # obj.read_data_pandas(conn)
-        # obj.left_join(cursor)
-        # obj.unique_dress(cursor)
-        # obj.zero_recommendation(cursor)
-        # obj.total_sales(cursor)
+        obj.create_sql_tables(cursor)
+        obj.load_data(cursor)
+        conn.commit()
+        cursor.execute("use task24july")
+        obj.read_data_pandas(conn)
+        obj.left_join(cursor)
+        obj.unique_dress(cursor)
+        obj.zero_recommendation(cursor)
+        obj.total_sales(cursor)
         obj.third_highest(cursor)
-    # client = obj.connect_mongodb()
-    # obj.upload_to_mongo(client)
+    client = obj.connect_mongodb()
+    obj.upload_to_mongo(client)
 
     conn.close()
-    # client.close()
+    client.close()

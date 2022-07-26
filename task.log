@@ -1,2 +1,14 @@
-2022-07-27 01:11:14,287 : Connected to SQL database
-2022-07-27 01:11:14,303 : Third highest saled dress details fetched
+2022-07-27 01:37:34,283 : Connected to SQL database
+2022-07-27 01:37:34,289 : Database created successfully
+2022-07-27 01:37:34,311 : Table Attribute created successfully
+2022-07-27 01:37:34,332 : Table dress sales created successfully
+2022-07-27 01:37:35,753 : Failed to insert in attribute table: 1366 (HY000): Incorrect integer value: 'Orders' for column '22/9/2013' at row 1
+2022-07-27 01:37:35,838 : Failed to insert in attribute table: 1366 (HY000): Incorrect integer value: 'Removed' for column '12/9/2013' at row 1
+2022-07-27 01:37:36,058 : Data fetched successfully
+2022-07-27 01:37:36,061 : Data fetched after left join operation
+2022-07-27 01:37:36,082 : Unique dress id's fetched
+2022-07-27 01:37:36,088 : No of dress having recommendation 0 detail fetched
+2022-07-27 01:37:36,122 : Third highest saled dress details fetched
+2022-07-27 01:37:36,127 : Connected to Mongodb database
+2022-07-27 01:37:36,354 : Data converted in to json
+2022-07-27 01:37:36,393 : Data saved successfully
